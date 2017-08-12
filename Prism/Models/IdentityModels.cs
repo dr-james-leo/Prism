@@ -25,6 +25,12 @@ namespace Prism.Models
         {
         }
 
+        public DbSet<Consultant> Consultants { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<SkillScoringMatrixCell> SkillScoringMatrixCells { get; set; }
+        public DbSet<GradeScoringMatrixCell> GradeScoringMatrixCells { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

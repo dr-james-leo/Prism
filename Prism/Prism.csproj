@@ -178,14 +178,40 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConsultantsController.cs" />
+    <Compile Include="Controllers\GradesAPIController.cs" />
+    <Compile Include="Controllers\GradesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708100415191_Initial.cs" />
+    <Compile Include="Migrations\201708100415191_Initial.Designer.cs">
+      <DependentUpon>201708100415191_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708100421196_Initial1.cs" />
+    <Compile Include="Migrations\201708100421196_Initial1.Designer.cs">
+      <DependentUpon>201708100421196_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708100422490_Initial2.cs" />
+    <Compile Include="Migrations\201708100422490_Initial2.Designer.cs">
+      <DependentUpon>201708100422490_Initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Consultant.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\GradeScoringMatrix.cs" />
+    <Compile Include="Models\GradeScoringMatrixCell.cs" />
+    <Compile Include="Models\GradeScoringMatrixRow.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SkillScoringMatrix.cs" />
+    <Compile Include="Models\SkillScoringMatrixCell.cs" />
+    <Compile Include="Models\Skill.cs" />
+    <Compile Include="Models\SkillScoringMatrixRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -244,6 +270,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Skills\Create.cshtml" />
+    <Content Include="Views\Skills\Delete.cshtml" />
+    <Content Include="Views\Skills\Details.cshtml" />
+    <Content Include="Views\Skills\Edit.cshtml" />
+    <Content Include="Views\Skills\Index.cshtml" />
+    <Content Include="Views\Grades\Create.cshtml" />
+    <Content Include="Views\Grades\Delete.cshtml" />
+    <Content Include="Views\Grades\Details.cshtml" />
+    <Content Include="Views\Grades\Edit.cshtml" />
+    <Content Include="Views\Grades\Index.cshtml" />
+    <Content Include="Views\Consultants\Create.cshtml" />
+    <Content Include="Views\Consultants\Delete.cshtml" />
+    <Content Include="Views\Consultants\Details.cshtml" />
+    <Content Include="Views\Consultants\Edit.cshtml" />
+    <Content Include="Views\Consultants\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -255,6 +296,17 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708100415191_Initial.resx">
+      <DependentUpon>201708100415191_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708100421196_Initial1.resx">
+      <DependentUpon>201708100421196_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708100422490_Initial2.resx">
+      <DependentUpon>201708100422490_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
