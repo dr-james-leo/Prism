@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using log4net;
+using System.IO;
 
 namespace Prism
 {
@@ -18,6 +20,10 @@ namespace Prism
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
+            ILog logger = LogManager.GetLogger(typeof(MvcApplication));
+            logger.Info("Application started successfully.");
         }
     }
 }

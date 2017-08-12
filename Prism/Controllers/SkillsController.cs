@@ -7,16 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Prism.Models;
+using log4net;
 
 namespace Prism.Controllers
 {
+    
+
     public class SkillsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // GET: Skills
         public ActionResult Index()
         {
+            logger.Info("Testing");
             return View(db.Skills.ToList());
         }
 
