@@ -1,0 +1,1 @@
+﻿The API controllers need to consume JSON structures and return JSON structures.  Need to learn how to do that by watching video and looking at TLS.
