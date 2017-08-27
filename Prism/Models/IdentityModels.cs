@@ -30,6 +30,8 @@ namespace Prism.Models
         public DbSet<Grade> Grades { get; set; }
         public DbSet<SkillScoringMatrixCell> SkillScoringMatrixCells { get; set; }
         public DbSet<GradeScoringMatrixCell> GradeScoringMatrixCells { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         public static ApplicationDbContext Create()
         {
