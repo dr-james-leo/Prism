@@ -13,44 +13,44 @@ using Prism.Models;
 
 namespace Prism.Controllers
 {
-    public class ClientsController : ApiController
+    public class ProjectsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Clients
-        public IQueryable<Client> GetClients()
+        // GET: api/Projects
+        public IQueryable<Project> GetProjects()
         {
-            return db.Clients;
+            return db.Projects;
         }
 
-        // GET: api/Clients/5
-        [ResponseType(typeof(Client))]
-        public async Task<IHttpActionResult> GetClient(int id)
+        // GET: api/Projects/5
+        [ResponseType(typeof(Project))]
+        public async Task<IHttpActionResult> GetProject(int id)
         {
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return Ok(client);
+            return Ok(project);
         }
 
-        // PUT: api/Clients/5
+        // PUT: api/Projects/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutClient(int id, Client client)
+        public async Task<IHttpActionResult> PutProject(int id, Project project)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != client.ClientId)
+            if (id != project.ProjectId)
             {
                 return BadRequest();
             }
 
-            db.Entry(client).State = EntityState.Modified;
+            db.Entry(project).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace Prism.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClientExists(id))
+                if (!ProjectExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace Prism.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Clients
-        [ResponseType(typeof(Client))]
-        public async Task<IHttpActionResult> PostClient(Client client)
+        // POST: api/Projects
+        [ResponseType(typeof(Project))]
+        public async Task<IHttpActionResult> PostProject(Project project)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Clients.Add(client);
+            db.Projects.Add(project);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = client.ClientId }, client);
+            return CreatedAtRoute("DefaultApi", new { id = project.ProjectId }, project);
         }
 
-        // DELETE: api/Clients/5
-        [ResponseType(typeof(Client))]
-        public async Task<IHttpActionResult> DeleteClient(int id)
+        // DELETE: api/Projects/5
+        [ResponseType(typeof(Project))]
+        public async Task<IHttpActionResult> DeleteProject(int id)
         {
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            db.Clients.Remove(client);
+            db.Projects.Remove(project);
             await db.SaveChangesAsync();
 
-            return Ok(client);
+            return Ok(project);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace Prism.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ClientExists(int id)
+        private bool ProjectExists(int id)
         {
-            return db.Clients.Count(e => e.ClientId == id) > 0;
+            return db.Projects.Count(e => e.ProjectId == id) > 0;
         }
     }
 }

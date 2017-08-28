@@ -11,107 +11,107 @@ using Prism.Models;
 
 namespace Prism.Controllers
 {
-    public class Clients1Controller : Controller
+    public class Projects1Controller : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Clients1
+        // GET: Projects1
         public async Task<ActionResult> Index()
         {
-            return View(await db.Clients.ToListAsync());
+            return View(await db.Projects.ToListAsync());
         }
 
-        // GET: Clients1/Details/5
+        // GET: Projects1/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(project);
         }
 
-        // GET: Clients1/Create
+        // GET: Projects1/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Clients1/Create
+        // POST: Projects1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ClientId,Name")] Client client)
+        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Code,Name,StartDate,EndDate,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
-                db.Clients.Add(client);
+                db.Projects.Add(project);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(client);
+            return View(project);
         }
 
-        // GET: Clients1/Edit/5
+        // GET: Projects1/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(project);
         }
 
-        // POST: Clients1/Edit/5
+        // POST: Projects1/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ClientId,Name")] Client client)
+        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Code,Name,StartDate,EndDate,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(client).State = EntityState.Modified;
+                db.Entry(project).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(client);
+            return View(project);
         }
 
-        // GET: Clients1/Delete/5
+        // GET: Projects1/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(project);
         }
 
-        // POST: Clients1/Delete/5
+        // POST: Projects1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Client client = await db.Clients.FindAsync(id);
-            db.Clients.Remove(client);
+            Project project = await db.Projects.FindAsync(id);
+            db.Projects.Remove(project);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

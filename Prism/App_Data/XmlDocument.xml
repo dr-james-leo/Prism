@@ -481,12 +481,6 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:Prism.Controllers.ValuesController.Get">
-            <summary>
-            Fucking cool code
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Prism.Models.Client">
             <summary>
             A client of ours
