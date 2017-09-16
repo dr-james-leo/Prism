@@ -22,6 +22,7 @@ namespace Prism.Models
         public string Name { get; set; }
 
         [Required]
+        public int ClientId { get; set; }
         public virtual Client Client { get; set; }
 
         public DateTime StartDate { get; set; }

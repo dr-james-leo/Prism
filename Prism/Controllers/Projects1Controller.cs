@@ -47,7 +47,7 @@ namespace Prism.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Code,Name,StartDate,EndDate,Description")] Project project)
+        public async Task<ActionResult> Create([Bind(Include = "ProjectId,Code,Name,StartDate,EndDate,Description,ClientId")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Prism.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Code,Name,StartDate,EndDate,Description")] Project project)
+        public async Task<ActionResult> Edit([Bind(Include = "ProjectId,Code,Name,StartDate,EndDate,Description,ClientId")] Project project)
         {
             if (ModelState.IsValid)
             {

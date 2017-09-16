@@ -246,6 +246,26 @@
     <Compile Include="Migrations\201708271023411_ClientsProjects.Designer.cs">
       <DependentUpon>201708271023411_ClientsProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708300458197_ChangeToProjects.cs" />
+    <Compile Include="Migrations\201708300458197_ChangeToProjects.Designer.cs">
+      <DependentUpon>201708300458197_ChangeToProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709010939233_RemovedClientFromProjects.cs" />
+    <Compile Include="Migrations\201709010939233_RemovedClientFromProjects.Designer.cs">
+      <DependentUpon>201709010939233_RemovedClientFromProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709010943459_RemovedDatesFromProjects.cs" />
+    <Compile Include="Migrations\201709010943459_RemovedDatesFromProjects.Designer.cs">
+      <DependentUpon>201709010943459_RemovedDatesFromProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709010949495_AddedDatesFromProjects.cs" />
+    <Compile Include="Migrations\201709010949495_AddedDatesFromProjects.Designer.cs">
+      <DependentUpon>201709010949495_AddedDatesFromProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709010953144_AddedClientToProjects.cs" />
+    <Compile Include="Migrations\201709010953144_AddedClientToProjects.Designer.cs">
+      <DependentUpon>201709010953144_AddedClientToProjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -402,6 +422,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708271023411_ClientsProjects.resx">
       <DependentUpon>201708271023411_ClientsProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708300458197_ChangeToProjects.resx">
+      <DependentUpon>201708300458197_ChangeToProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709010939233_RemovedClientFromProjects.resx">
+      <DependentUpon>201709010939233_RemovedClientFromProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709010943459_RemovedDatesFromProjects.resx">
+      <DependentUpon>201709010943459_RemovedDatesFromProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709010949495_AddedDatesFromProjects.resx">
+      <DependentUpon>201709010949495_AddedDatesFromProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709010953144_AddedClientToProjects.resx">
+      <DependentUpon>201709010953144_AddedClientToProjects.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

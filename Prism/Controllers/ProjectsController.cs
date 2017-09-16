@@ -20,11 +20,35 @@ namespace Prism.Controllers
         // GET: api/Projects
         public IQueryable<Project> GetProjects()
         {
-            return db.Projects;
+
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+
+            //IEnumerable<Project> results = db.Projects.Where(project => project.ProjectId == 2);
+            //int numberProjects = db.Projects.Count();
+            return db.Projects.Include(Project => Project.Client);
+            //return db.Projects;
         }
 
-        // GET: api/Projects/5
-        [ResponseType(typeof(Project))]
+        //db.Configuration.LazyLoadingEnabled = false;
+        //db.Configuration.ProxyCreationEnabled = false;
+        //db.Projects.Include(o => o.Client);
+        //var project1 = db.Projects.Find(1);
+        //var project2 = db.Projects.Find(2);
+
+        //DbSet<Project> xx = db.Projects;
+        //xx.
+
+        //    int i = 1;
+        //string name1 = db.Projects.Find(i).Client.Name;
+        //    foreach (Project x in db.Projects)
+        //    {
+        //        string name = db.Projects.Find(i).Client.Name;
+        //i++;
+        //    }
+
+    // GET: api/Projects/5
+    [ResponseType(typeof(Project))]
         public async Task<IHttpActionResult> GetProject(int id)
         {
             Project project = await db.Projects.FindAsync(id);

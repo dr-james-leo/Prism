@@ -23,6 +23,9 @@ namespace Prism.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+           // this.Configuration.LazyLoadingEnabled = false;
+            //this.Projects.Include(o => o.Client);
+            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Consultant> Consultants { get; set; }
