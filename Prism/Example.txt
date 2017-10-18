@@ -1,0 +1,63 @@
+﻿Create a Client
+http://prism.abury.com/api/Clients/
+POST
+body:
+{
+    "Name": "SCB"
+}
+
+Update a Client
+http://prism.abury.com/api/Clients/2
+PUT
+body:
+{
+    "ClientId": 2,
+    "Name": "SCBS"
+}
+
+Return list of clients
+GET
+http://prism.abury.com/api/Clients/
+
+Return a single client
+GET
+http://prism.abury.com/clients/1       
+
+Create a Project
+http://prism.abury.com/api/Projects/
+POST
+body:
+{     
+	"Code": "DAT",        
+	"Name": "Data Driven Org",
+	"ClientId": 2,
+	"StartDate": "1900-01-01T00:00:00",        
+	"EndDate": "1900-01-01T00:00:00",        
+	"Description": "Using data to drive the organisation",        
+	"Consultants": null    
+}
+
+Update a project
+http://prism.abury.com/api/Projects/1
+PUT
+body:
+{
+    "ProjectId": 1,
+    "Code": "DAT",
+    "Name": "Data Driven Organisation",
+    "ClientId": 2,
+    "Client": null,
+    "StartDate": "1900-01-01T00:00:00",
+    "EndDate": "1900-01-01T00:00:00",
+    "Description": "Using data to drive the organisation",
+    "Consultants": null
+}
+
+Return list of projects
+GET
+http://prism.abury.com/api/Projects/
+
+Return a single project
+GET
+http://prism.abury.com/projects/1   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                  

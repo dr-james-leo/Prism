@@ -2,117 +2,106 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 using Prism.Models;
 
 namespace Prism.Controllers
 {
-    public class GradesController : Controller
+    public class GradesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Grades
-        public ActionResult Index()
+        // GET: api/Grades
+        public IQueryable<Grade> GetGrades()
         {
-            return View(db.Grades.ToList());
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+            return db.Grades;
         }
 
-        // GET: Grades/Details/5
-        public ActionResult Details(int? id)
+        // GET: api/Grades/5
+        [ResponseType(typeof(Grade))]
+        public async Task<IHttpActionResult> GetGrade(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Grade grade = db.Grades.Find(id);
+            Grade grade = await db.Grades.FindAsync(id);
             if (grade == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(grade);
+
+            return Ok(grade);
         }
 
-        // GET: Grades/Create
-        public ActionResult Create()
+        // PUT: api/Grades/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutGrade(int id, Grade grade)
         {
-            return View();
-        }
-
-        // POST: Grades/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GradeId,Level,Name")] Grade grade)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Grades.Add(grade);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return BadRequest(ModelState);
             }
 
-            return View(grade);
+            if (id != grade.GradeId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(grade).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GradeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Grades/Edit/5
-        public ActionResult Edit(int? id)
+        // POST: api/Grades
+        [ResponseType(typeof(Grade))]
+        public async Task<IHttpActionResult> PostGrade(Grade grade)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            Grade grade = db.Grades.Find(id);
+
+            db.Grades.Add(grade);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = grade.GradeId }, grade);
+        }
+
+        // DELETE: api/Grades/5
+        [ResponseType(typeof(Grade))]
+        public async Task<IHttpActionResult> DeleteGrade(int id)
+        {
+            Grade grade = await db.Grades.FindAsync(id);
             if (grade == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(grade);
-        }
 
-        // POST: Grades/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GradeId,Level,Name")] Grade grade)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(grade).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(grade);
-        }
-
-        // GET: Grades/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Grade grade = db.Grades.Find(id);
-            if (grade == null)
-            {
-                return HttpNotFound();
-            }
-            return View(grade);
-        }
-
-        // POST: Grades/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Grade grade = db.Grades.Find(id);
             db.Grades.Remove(grade);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            await db.SaveChangesAsync();
+
+            return Ok(grade);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +111,11 @@ namespace Prism.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool GradeExists(int id)
+        {
+            return db.Grades.Count(e => e.GradeId == id) > 0;
         }
     }
 }

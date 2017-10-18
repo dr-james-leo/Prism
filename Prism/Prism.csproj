@@ -220,7 +220,6 @@
     <Compile Include="Controllers\Clients1Controller.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
-    <Compile Include="Controllers\GradesAPIController.cs" />
     <Compile Include="Controllers\GradesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -266,6 +265,10 @@
     <Compile Include="Migrations\201709010953144_AddedClientToProjects.Designer.cs">
       <DependentUpon>201709010953144_AddedClientToProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709251255349_AddGradeIdToConsultant.cs" />
+    <Compile Include="Migrations\201709251255349_AddGradeIdToConsultant.Designer.cs">
+      <DependentUpon>201709251255349_AddGradeIdToConsultant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -291,6 +294,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Example.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -382,11 +386,6 @@
     <Content Include="Views\Skills\Details.cshtml" />
     <Content Include="Views\Skills\Edit.cshtml" />
     <Content Include="Views\Skills\Index.cshtml" />
-    <Content Include="Views\Grades\Create.cshtml" />
-    <Content Include="Views\Grades\Delete.cshtml" />
-    <Content Include="Views\Grades\Details.cshtml" />
-    <Content Include="Views\Grades\Edit.cshtml" />
-    <Content Include="Views\Grades\Index.cshtml" />
     <Content Include="Views\Consultants\Create.cshtml" />
     <Content Include="Views\Consultants\Delete.cshtml" />
     <Content Include="Views\Consultants\Details.cshtml" />
@@ -437,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709010953144_AddedClientToProjects.resx">
       <DependentUpon>201709010953144_AddedClientToProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251255349_AddGradeIdToConsultant.resx">
+      <DependentUpon>201709251255349_AddGradeIdToConsultant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

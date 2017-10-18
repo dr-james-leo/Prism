@@ -1,1 +1,7 @@
-﻿The API controllers need to consume JSON structures and return JSON structures.  Need to learn how to do that by watching video and looking at TLS.
+Can creat a client
+Can create a project
+A project needs consultants
+Each consultant has a grade
+Each consultant has a list of skills
+Need to create some grades and then attach them to the consultant
+Then need to create some skills and attach them to the consultant

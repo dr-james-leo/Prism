@@ -21,6 +21,7 @@ namespace Prism.Models
         public string LastName { get; set; }
 
         [Required]
+        public int GradeId { get; set; }
         public virtual Grade Grade { get; set; } // 1 is the highest level, then 2, 3, 4, etc
 
         [Required()]
