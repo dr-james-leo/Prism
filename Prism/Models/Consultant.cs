@@ -29,5 +29,7 @@ namespace Prism.Models
         public string Email { get; set; }
 
         public virtual List<Skill> Skills { get; set; }
+
+        public int ProjectId { get; set; }
     }
 }

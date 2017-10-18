@@ -10,6 +10,7 @@ namespace Prism.Models
     {
         public int GradeId { get; set; }
 
+        [Required]
         public int Level { get; set; } // 1 is highest and then 2, 3, 4, etc
 
         [Required()]

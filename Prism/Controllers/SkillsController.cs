@@ -2,122 +2,106 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 using Prism.Models;
-using log4net;
 
 namespace Prism.Controllers
 {
-    
-
-    public class SkillsController : Controller
+    public class SkillsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private static readonly ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        // GET: Skills
-        public ActionResult Index()
+        // GET: api/Skills
+        public IQueryable<Skill> GetSkills()
         {
-            logger.Info("Testing");
-            return View(db.Skills.ToList());
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+            return db.Skills;
         }
 
-        // GET: Skills/Details/5
-        public ActionResult Details(int? id)
+        // GET: api/Skills/5
+        [ResponseType(typeof(Skill))]
+        public async Task<IHttpActionResult> GetSkill(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Skill skill = db.Skills.Find(id);
+            Skill skill = await db.Skills.FindAsync(id);
             if (skill == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(skill);
+
+            return Ok(skill);
         }
 
-        // GET: Skills/Create
-        public ActionResult Create()
+        // PUT: api/Skills/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutSkill(int id, Skill skill)
         {
-            return View();
-        }
-
-        // POST: Skills/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SkillId,Name")] Skill skill)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Skills.Add(skill);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return BadRequest(ModelState);
             }
 
-            return View(skill);
+            if (id != skill.SkillId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(skill).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SkillExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Skills/Edit/5
-        public ActionResult Edit(int? id)
+        // POST: api/Skills
+        [ResponseType(typeof(Skill))]
+        public async Task<IHttpActionResult> PostSkill(Skill skill)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            Skill skill = db.Skills.Find(id);
+
+            db.Skills.Add(skill);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = skill.SkillId }, skill);
+        }
+
+        // DELETE: api/Skills/5
+        [ResponseType(typeof(Skill))]
+        public async Task<IHttpActionResult> DeleteSkill(int id)
+        {
+            Skill skill = await db.Skills.FindAsync(id);
             if (skill == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(skill);
-        }
 
-        // POST: Skills/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SkillId,Name")] Skill skill)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(skill).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(skill);
-        }
-
-        // GET: Skills/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Skill skill = db.Skills.Find(id);
-            if (skill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(skill);
-        }
-
-        // POST: Skills/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Skill skill = db.Skills.Find(id);
             db.Skills.Remove(skill);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            await db.SaveChangesAsync();
+
+            return Ok(skill);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,6 +111,11 @@ namespace Prism.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool SkillExists(int id)
+        {
+            return db.Skills.Count(e => e.SkillId == id) > 0;
         }
     }
 }

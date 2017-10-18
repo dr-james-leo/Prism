@@ -1,7 +1,16 @@
 Can creat a client
 Can create a project
+Can create Grades
+Can create Skills
+
 A project needs consultants
 Each consultant has a grade
 Each consultant has a list of skills
-Need to create some grades and then attach them to the consultant
-Then need to create some skills and attach them to the consultant
+Need to create some grades - Done
+Then need to create some skills - Done
+
+Now to create consultants with a grades and skills
+
+How to create a consultant with more than one skill? Let's try an update
+
+

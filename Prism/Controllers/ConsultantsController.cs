@@ -2,117 +2,106 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 using Prism.Models;
 
 namespace Prism.Controllers
 {
-    public class ConsultantsController : Controller
+    public class ConsultantsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Consultants
-        public ActionResult Index()
+        // GET: api/Consultants
+        public IQueryable<Consultant> GetConsultants()
         {
-            return View(db.Consultants.ToList());
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+            return db.Consultants;
         }
 
-        // GET: Consultants/Details/5
-        public ActionResult Details(int? id)
+        // GET: api/Consultants/5
+        [ResponseType(typeof(Consultant))]
+        public async Task<IHttpActionResult> GetConsultant(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Consultant consultant = db.Consultants.Find(id);
+            Consultant consultant = await db.Consultants.FindAsync(id);
             if (consultant == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(consultant);
+
+            return Ok(consultant);
         }
 
-        // GET: Consultants/Create
-        public ActionResult Create()
+        // PUT: api/Consultants/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutConsultant(int id, Consultant consultant)
         {
-            return View();
-        }
-
-        // POST: Consultants/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ConsultantId,FirstName,LastName,Email")] Consultant consultant)
-        {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Consultants.Add(consultant);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return BadRequest(ModelState);
             }
 
-            return View(consultant);
+            if (id != consultant.ConsultantId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(consultant).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ConsultantExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // GET: Consultants/Edit/5
-        public ActionResult Edit(int? id)
+        // POST: api/Consultants
+        [ResponseType(typeof(Consultant))]
+        public async Task<IHttpActionResult> PostConsultant(Consultant consultant)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
             }
-            Consultant consultant = db.Consultants.Find(id);
+
+            db.Consultants.Add(consultant);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = consultant.ConsultantId }, consultant);
+        }
+
+        // DELETE: api/Consultants/5
+        [ResponseType(typeof(Consultant))]
+        public async Task<IHttpActionResult> DeleteConsultant(int id)
+        {
+            Consultant consultant = await db.Consultants.FindAsync(id);
             if (consultant == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
-            return View(consultant);
-        }
 
-        // POST: Consultants/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ConsultantId,FirstName,LastName,Email")] Consultant consultant)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(consultant).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(consultant);
-        }
-
-        // GET: Consultants/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Consultant consultant = db.Consultants.Find(id);
-            if (consultant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(consultant);
-        }
-
-        // POST: Consultants/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Consultant consultant = db.Consultants.Find(id);
             db.Consultants.Remove(consultant);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            await db.SaveChangesAsync();
+
+            return Ok(consultant);
         }
 
         protected override void Dispose(bool disposing)
@@ -122,6 +111,11 @@ namespace Prism.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool ConsultantExists(int id)
+        {
+            return db.Consultants.Count(e => e.ConsultantId == id) > 0;
         }
     }
 }
