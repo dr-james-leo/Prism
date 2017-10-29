@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,7 @@ namespace Prism.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public virtual List<Consultant> Consultants { get; set; }
     }
 }

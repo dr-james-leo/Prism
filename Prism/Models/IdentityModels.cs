@@ -40,5 +40,20 @@ namespace Prism.Models
         {
             return new ApplicationDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Consultant>()
+                .HasMany<Skill>(c => c.Skills)
+                .WithMany(s => s.Consultants)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("ConsultantId");
+                    cs.MapRightKey("SkillId");
+                    cs.ToTable("ConsultantSkills");
+                });
+        }
     }
 }

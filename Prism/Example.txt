@@ -164,5 +164,73 @@ DELETE
 http://prism.abury.com/api/Consultants/3
 
 
+All Consultants (there are only one). Returns an array
+[
+    {
+        "$id": "1",
+        "ConsultantId": 2,
+        "FirstName": "James Lewis",
+        "LastName": "Leo",
+        "GradeId": 1,
+        "Grade": null,
+        "Email": "jleo@palo-it.com",
+        "Skills": null,
+        "ProjectId": 2
+    }
+]
+   
+{
+    "$id": "1",
+    "Grade": {
+        "$id": "2",
+        "Consultants": [
+            {
+                "$ref": "1"
+            }
+        ],
+        "GradeId": 1,
+        "Level": 1,
+        "Name": "Advisor"
+    },
+    "Skills": [],
+    "ConsultantId": 2,
+    "FirstName": "James Lewis",
+    "LastName": "Leo",
+    "GradeId": 1,
+    "Email": "jleo@palo-it.com",
+    "ProjectId": 2
+}        
+{
+    "$id": "1",
+    "Grade": {
+        "$id": "2",
+        "GradeId": 1,
+        "Level": 1,
+        "Name": "Advisor"
+    },
+    "Skills": [],
+    "ConsultantId": 2,
+    "FirstName": "James Lewis",
+    "LastName": "Leo",
+    "GradeId": 1,
+    "Email": "jleo@palo-it.com",
+    "ProjectId": 2
+}          
 
-                                                                                                                                                                                                                                                                                                                                                                                  
+
+Trying to update a consultant with following:
+{
+	"Skills": [
+		{
+		"Consultants": [],
+		    "SkillId": 1,
+		    "Name": "HTML & CSS"
+		}
+	],
+    "ConsultantId": 2,
+    "FirstName": "James",
+    "LastName": "Leo",
+    "GradeId": 1,
+    "Email": "jleo@palo-it.com",
+    "ProjectId": 2
+}                                                                                                                                                                                                                                                                                                                                                             

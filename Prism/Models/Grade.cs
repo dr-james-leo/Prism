@@ -17,6 +17,6 @@ namespace Prism.Models
         [StringLength(100)]
         public string Name { get; set; }
 
-        public virtual List<Consultant> Consultants { get; set; }
+        //public virtual List<Consultant> Consultants { get; set; }
     }
 }

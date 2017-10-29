@@ -20,7 +20,7 @@ namespace Prism.Controllers
         // GET: api/Consultants
         public IQueryable<Consultant> GetConsultants()
         {
-            db.Configuration.LazyLoadingEnabled = false;
+            //db.Configuration.LazyLoadingEnabled = false;
             db.Configuration.ProxyCreationEnabled = false;
             return db.Consultants;
         }
@@ -42,6 +42,8 @@ namespace Prism.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutConsultant(int id, Consultant consultant)
         {
+            //db.Configuration.LazyLoadingEnabled = false;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -52,10 +54,35 @@ namespace Prism.Controllers
                 return BadRequest();
             }
 
-            db.Entry(consultant).State = EntityState.Modified;
+            //db.Consultants.Attach(consultant);
+            //db.Entry(consultant).State = EntityState.Modified;
+           // db.Entry(consultant.Skills[0]).State = EntityState.Modified;
 
             try
             {
+                // create the join between posts and categories
+                Consultant dbConsultant = db.Consultants.Include("Skills").Single(c => c.ConsultantId == consultant.ConsultantId);
+
+                // Updates the Name property
+                db.Entry(dbConsultant).CurrentValues.SetValues(consultant);
+
+                // Remove unused Skills
+                foreach (Skill mySkill in dbConsultant.Skills.ToList())
+                {
+                    if (!consultant.Skills.Any(t => t.SkillId == mySkill.SkillId))
+                        dbConsultant.Skills.Remove(mySkill);
+                }
+
+                // Add new Skills
+                foreach (Skill mySkill in consultant.Skills)
+                {
+                    if (!dbConsultant.Skills.Any(t => t.SkillId == mySkill.SkillId))
+                    {
+                        db.Skills.Attach(mySkill);
+                        dbConsultant.Skills.Add(mySkill);
+                    }
+                }
+                
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -82,6 +109,7 @@ namespace Prism.Controllers
                 return BadRequest(ModelState);
             }
 
+            db.Consultants.Attach(consultant);
             db.Consultants.Add(consultant);
             await db.SaveChangesAsync();
 

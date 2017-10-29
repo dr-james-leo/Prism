@@ -273,6 +273,14 @@
     <Compile Include="Migrations\201710180823097_ConsultantUpdate.Designer.cs">
       <DependentUpon>201710180823097_ConsultantUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710221405337_SkillUpdate.cs" />
+    <Compile Include="Migrations\201710221405337_SkillUpdate.Designer.cs">
+      <DependentUpon>201710221405337_SkillUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710250652592_SkillUpdate1.cs" />
+    <Compile Include="Migrations\201710250652592_SkillUpdate1.Designer.cs">
+      <DependentUpon>201710250652592_SkillUpdate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -436,6 +444,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710180823097_ConsultantUpdate.resx">
       <DependentUpon>201710180823097_ConsultantUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710221405337_SkillUpdate.resx">
+      <DependentUpon>201710221405337_SkillUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710250652592_SkillUpdate1.resx">
+      <DependentUpon>201710250652592_SkillUpdate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
