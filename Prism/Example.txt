@@ -17,9 +17,7 @@ body:
     "Name": "SCBS"
 }
 
-Return list of clients
-GET
-http://prism.abury.com/api/Clients/
+1`	
 
 Return a single client
 GET
@@ -233,4 +231,92 @@ Trying to update a consultant with following:
     "GradeId": 1,
     "Email": "jleo@palo-it.com",
     "ProjectId": 2
-}                                                                                                                                                                                                                                                                                                                                                             
+}                      
+
+A consultant with one skill:
+============================
+{
+    "$id": "1",
+    "Grade": {
+        "$id": "2",
+        "GradeId": 1,
+        "Level": 1,
+        "Name": "Advisor"
+    },
+    "Skills": [
+        {
+            "$id": "3",
+            "SkillId": 1,
+            "Name": "HTML & CSS"
+        }
+    ],
+    "ConsultantId": 2,
+    "FirstName": "James",
+    "LastName": "Leo",
+    "GradeId": 1,
+    "Email": "jleo@palo-it.com",
+    "ProjectId": 2
+}                 
+
+Using a PUT, able to update a consultant to have 3 skills:
+{
+    "Grade": {
+        "GradeId": 1,
+        "Level": 1,
+        "Name": "Advisor"
+    },
+    "Skills": [
+        {
+            "SkillId": 1,
+            "Name": "HTML & CSS"
+        },
+        {
+            "SkillId": 2,
+            "Name": "JavaScript"
+        },
+        {
+            "SkillId": 4,
+            "Name": "React"
+        }
+    ],
+    "ConsultantId": 2,
+    "FirstName": "James",
+    "LastName": "Leo",
+    "GradeId": 1,
+    "Email": "jleo@palo-it.com",
+    "ProjectId": 2
+}
+Doing a GET:
+{
+    "$id": "1",
+    "Grade": {
+        "$id": "2",
+        "GradeId": 1,
+        "Level": 1,
+        "Name": "Advisor"
+    },
+    "Skills": [
+        {
+            "$id": "3",
+            "SkillId": 1,
+            "Name": "HTML & CSS"
+        },
+        {
+            "$id": "4",
+            "SkillId": 2,
+            "Name": "JavaScript"
+        },
+        {
+            "$id": "5",
+            "SkillId": 4,
+            "Name": "React"
+        }
+    ],
+    "ConsultantId": 2,
+    "FirstName": "James",
+    "LastName": "Leo",
+    "GradeId": 1,
+    "Email": "jleo@palo-it.com",
+    "ProjectId": 2
+}
+                                                                                                                                                                                                                                                                                                                      

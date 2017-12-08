@@ -220,6 +220,7 @@
     <Compile Include="Controllers\Clients1Controller.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
+    <Compile Include="Controllers\Grades1Controller.cs" />
     <Compile Include="Controllers\GradesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -403,6 +404,11 @@
     <Content Include="Views\Clients1\Details.cshtml" />
     <Content Include="Views\Clients1\Edit.cshtml" />
     <Content Include="Views\Clients1\Index.cshtml" />
+    <Content Include="Views\Grades1\Create.cshtml" />
+    <Content Include="Views\Grades1\Delete.cshtml" />
+    <Content Include="Views\Grades1\Details.cshtml" />
+    <Content Include="Views\Grades1\Edit.cshtml" />
+    <Content Include="Views\Grades1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

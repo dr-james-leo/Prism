@@ -1,16 +1,18 @@
-Can creat a client
-Can create a project
-Can create Grades
-Can create Skills
+I think it is all working, now start to use.
 
-A project needs consultants
-Each consultant has a grade
-Each consultant has a list of skills
-Need to create some grades - Done
-Then need to create some skills - Done
+Goal
+====
+Starting from an empty DB.
+1. Create the Grades of a consultant.
+2. Create the consultants.
+3. Add the grades to the consultant (can this be done at time of creation of the consultant too?)
+4. Create a client
+5. Create a project for a client.
+6. Assign consultants to the project (can this be done at the time of creation of the project too?)
 
-Now to create consultants with a grades and skills
+Actions
+=======
 
-How to create a consultant with more than one skill? Let's try an update
-
-
+1. Created Grades1Controller with views.
+http://localhost:50197/grades1 lists all the grades
+When creating a grade, we can't duplicate the grade level. Ensure it is unqiue!
