@@ -219,6 +219,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Clients1Controller.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\Consultants1Controller.cs" />
     <Compile Include="Controllers\ConsultantsController.cs" />
     <Compile Include="Controllers\Grades1Controller.cs" />
     <Compile Include="Controllers\GradesController.cs" />
@@ -409,6 +410,11 @@
     <Content Include="Views\Grades1\Details.cshtml" />
     <Content Include="Views\Grades1\Edit.cshtml" />
     <Content Include="Views\Grades1\Index.cshtml" />
+    <Content Include="Views\Consultants1\Create.cshtml" />
+    <Content Include="Views\Consultants1\Delete.cshtml" />
+    <Content Include="Views\Consultants1\Details.cshtml" />
+    <Content Include="Views\Consultants1\Edit.cshtml" />
+    <Content Include="Views\Consultants1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

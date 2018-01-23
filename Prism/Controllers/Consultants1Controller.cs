@@ -11,136 +11,112 @@ using Prism.Models;
 
 namespace Prism.Controllers
 {
-    public class Grades1Controller : Controller
+    public class Consultants1Controller : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Grades1
+        // GET: Consultants1
         public async Task<ActionResult> Index()
         {
-            return View(await db.Grades.ToListAsync());
+            var consultants = db.Consultants.Include(c => c.Grade);
+            return View(await consultants.ToListAsync());
         }
 
-        // GET: Grades1/Details/5
+        // GET: Consultants1/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grade grade = await db.Grades.FindAsync(id);
-            if (grade == null)
+            Consultant consultant = await db.Consultants.FindAsync(id);
+            if (consultant == null)
             {
                 return HttpNotFound();
             }
-            return View(grade);
+            return View(consultant);
         }
 
-        // GET: Grades1/Create
+        // GET: Consultants1/Create
         public ActionResult Create()
         {
+            ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "Name");
             return View();
         }
 
-        // POST: Grades1/Create
+        // POST: Consultants1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "GradeId,Level,Name")] Grade grade)
+        public async Task<ActionResult> Create([Bind(Include = "ConsultantId,FirstName,LastName,GradeId,Email,ProjectId")] Consultant consultant)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                    throw new Exception("Invalid Model");
-
-                // Need to ensure Level is unique
-                if (db.Grades.Count(x => x.Level == grade.Level) > 0)
-                {
-                    ModelState.AddModelError("Level", "Level is in use");
-                    throw new Exception("Grade Level in use");
-                }
-                                      
-                //IQueryable<Grade> listOfDuplicateGrades = db.Grades.Where(x => x.Level == grade.Level);
-
-                db.Grades.Add(grade);
+                db.Consultants.Add(consultant);
                 await db.SaveChangesAsync();
-
-                return RedirectToAction("Index");               
+                return RedirectToAction("Index");
             }
-            catch(Exception ex)
-            {
-                return View(grade);
-            }    
+
+            ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "Name", consultant.GradeId);
+            return View(consultant);
         }
 
-        // GET: Grades1/Edit/5
+        // GET: Consultants1/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grade grade = await db.Grades.FindAsync(id);
-            if (grade == null)
+            Consultant consultant = await db.Consultants.FindAsync(id);
+            if (consultant == null)
             {
                 return HttpNotFound();
             }
-            return View(grade);
+            ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "Name", consultant.GradeId);
+            return View(consultant);
         }
 
-        // POST: Grades1/Edit/5
+        // POST: Consultants1/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "GradeId,Level,Name")] Grade grade)
+        public async Task<ActionResult> Edit([Bind(Include = "ConsultantId,FirstName,LastName,GradeId,Email,ProjectId")] Consultant consultant)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                    throw new Exception("Invalid Model");
-
-                // Need to ensure Level is unique
-                if (db.Grades.Count(x => x.Level == grade.Level) > 0)
-                {
-                    ModelState.AddModelError("Level", "Level is in use");
-                    throw new Exception("Grade Level in use");
-                }                  
-
-                db.Entry(grade).State = EntityState.Modified;
+                db.Entry(consultant).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                return View(grade);
-            }
+            ViewBag.GradeId = new SelectList(db.Grades, "GradeId", "Name", consultant.GradeId);
+            return View(consultant);
         }
 
-        // GET: Grades1/Delete/5
+        // GET: Consultants1/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Grade grade = await db.Grades.FindAsync(id);
-            if (grade == null)
+            Consultant consultant = await db.Consultants.FindAsync(id);
+            if (consultant == null)
             {
                 return HttpNotFound();
             }
-            return View(grade);
+            return View(consultant);
         }
 
-        // POST: Grades1/Delete/5
+        // POST: Consultants1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Grade grade = await db.Grades.FindAsync(id);
-            db.Grades.Remove(grade);
+            Consultant consultant = await db.Consultants.FindAsync(id);
+            db.Consultants.Remove(consultant);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

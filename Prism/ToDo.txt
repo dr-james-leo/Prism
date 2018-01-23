@@ -16,3 +16,5 @@ Actions
 1. Created Grades1Controller with views.
 http://localhost:50197/grades1 lists all the grades
 When creating a grade, we can't duplicate the grade level. Ensure it is unqiue!
+
+Need to add logging next.  Log to db so we can have multiple servers
