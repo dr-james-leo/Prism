@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -231,57 +232,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708100415191_Initial.cs" />
-    <Compile Include="Migrations\201708100415191_Initial.Designer.cs">
-      <DependentUpon>201708100415191_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708100421196_Initial1.cs" />
-    <Compile Include="Migrations\201708100421196_Initial1.Designer.cs">
-      <DependentUpon>201708100421196_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708100422490_Initial2.cs" />
-    <Compile Include="Migrations\201708100422490_Initial2.Designer.cs">
-      <DependentUpon>201708100422490_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708271023411_ClientsProjects.cs" />
-    <Compile Include="Migrations\201708271023411_ClientsProjects.Designer.cs">
-      <DependentUpon>201708271023411_ClientsProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708300458197_ChangeToProjects.cs" />
-    <Compile Include="Migrations\201708300458197_ChangeToProjects.Designer.cs">
-      <DependentUpon>201708300458197_ChangeToProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010939233_RemovedClientFromProjects.cs" />
-    <Compile Include="Migrations\201709010939233_RemovedClientFromProjects.Designer.cs">
-      <DependentUpon>201709010939233_RemovedClientFromProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010943459_RemovedDatesFromProjects.cs" />
-    <Compile Include="Migrations\201709010943459_RemovedDatesFromProjects.Designer.cs">
-      <DependentUpon>201709010943459_RemovedDatesFromProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010949495_AddedDatesFromProjects.cs" />
-    <Compile Include="Migrations\201709010949495_AddedDatesFromProjects.Designer.cs">
-      <DependentUpon>201709010949495_AddedDatesFromProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010953144_AddedClientToProjects.cs" />
-    <Compile Include="Migrations\201709010953144_AddedClientToProjects.Designer.cs">
-      <DependentUpon>201709010953144_AddedClientToProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709251255349_AddGradeIdToConsultant.cs" />
-    <Compile Include="Migrations\201709251255349_AddGradeIdToConsultant.Designer.cs">
-      <DependentUpon>201709251255349_AddGradeIdToConsultant.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710180823097_ConsultantUpdate.cs" />
-    <Compile Include="Migrations\201710180823097_ConsultantUpdate.Designer.cs">
-      <DependentUpon>201710180823097_ConsultantUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710221405337_SkillUpdate.cs" />
-    <Compile Include="Migrations\201710221405337_SkillUpdate.Designer.cs">
-      <DependentUpon>201710221405337_SkillUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710250652592_SkillUpdate1.cs" />
-    <Compile Include="Migrations\201710250652592_SkillUpdate1.Designer.cs">
-      <DependentUpon>201710250652592_SkillUpdate1.cs</DependentUpon>
+    <Compile Include="Migrations\201801240526256_InitialCreate.cs" />
+    <Compile Include="Migrations\201801240526256_InitialCreate.Designer.cs">
+      <DependentUpon>201801240526256_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -341,6 +294,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\prism-test - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Prism5 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -416,53 +370,16 @@
     <Content Include="Views\Consultants1\Edit.cshtml" />
     <Content Include="Views\Consultants1\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801240526256_InitialCreate.resx">
+      <DependentUpon>201801240526256_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708100415191_Initial.resx">
-      <DependentUpon>201708100415191_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708100421196_Initial1.resx">
-      <DependentUpon>201708100421196_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708100422490_Initial2.resx">
-      <DependentUpon>201708100422490_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708271023411_ClientsProjects.resx">
-      <DependentUpon>201708271023411_ClientsProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708300458197_ChangeToProjects.resx">
-      <DependentUpon>201708300458197_ChangeToProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010939233_RemovedClientFromProjects.resx">
-      <DependentUpon>201709010939233_RemovedClientFromProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010943459_RemovedDatesFromProjects.resx">
-      <DependentUpon>201709010943459_RemovedDatesFromProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010949495_AddedDatesFromProjects.resx">
-      <DependentUpon>201709010949495_AddedDatesFromProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010953144_AddedClientToProjects.resx">
-      <DependentUpon>201709010953144_AddedClientToProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709251255349_AddGradeIdToConsultant.resx">
-      <DependentUpon>201709251255349_AddGradeIdToConsultant.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710180823097_ConsultantUpdate.resx">
-      <DependentUpon>201710180823097_ConsultantUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710221405337_SkillUpdate.resx">
-      <DependentUpon>201710221405337_SkillUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710250652592_SkillUpdate1.resx">
-      <DependentUpon>201710250652592_SkillUpdate1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

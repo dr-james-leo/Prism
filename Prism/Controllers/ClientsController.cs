@@ -88,16 +88,27 @@ namespace Prism.Controllers
 
         // DELETE: api/Clients/5
         [ResponseType(typeof(Client))]
-        public async Task<IHttpActionResult> DeleteClient(int id)
+        //public async Task<IHttpActionResult> DeleteClient(int id)
+        public async Task<IHttpActionResult> DeleteClient(string id)
         {
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
+            Client client = new Client();
+            string clientName = id;
+            try
             {
-                return NotFound();
-            }
+                client = db.Clients.FirstOrDefault<Client>(c => c.Name == clientName);
+                
+                if (client == null)
+                {
+                    return NotFound();
+                }
 
-            db.Clients.Remove(client);
-            await db.SaveChangesAsync();
+                db.Clients.Remove(client);
+                await db.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                string error = ex.Message;
+            }
 
             return Ok(client);
         }

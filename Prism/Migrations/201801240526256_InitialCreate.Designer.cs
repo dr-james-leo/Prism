@@ -7,13 +7,13 @@ namespace Prism.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RemovedDatesFromProjects : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedDatesFromProjects));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709010943459_RemovedDatesFromProjects"; }
+            get { return "201801240526256_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
